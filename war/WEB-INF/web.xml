@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>gov.oit.storefrontweb.server.GreetingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/storefront/greet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+		<servlet-name>EMPLOYEELIST</servlet-name>
+		<servlet-class>gov.oit.storefrontweb.presenter.EmployeeList</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CLEANUP</servlet-name>
+		<servlet-class>gov.oit.storefrontweb.presenter.cleanUp</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EMPLOYEELIST</servlet-name>
+		<url-pattern>/employeelist</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CLEANUP</servlet-name>
+		<url-pattern>/cleanUp</url-pattern>
+	</servlet-mapping>
+  
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Storefront.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
