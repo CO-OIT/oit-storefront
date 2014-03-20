@@ -17,6 +17,11 @@ public class EmployeeManager{
 	
 		private List<String> errors;
 		
+		//Delete user
+		//
+		
+		
+		//TODO determine whether add should also update
 		public boolean addEmployee(			
 				String agency, 
 				String eid, 
