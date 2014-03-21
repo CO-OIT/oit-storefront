@@ -19,6 +19,7 @@ public class Employee {
 	private String phone1;
 	private String phone2;
     private String positionNum;
+    private boolean active;
 	    
     public String getEmployeeName() {
 		return employeeName;
@@ -67,6 +68,12 @@ public class Employee {
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

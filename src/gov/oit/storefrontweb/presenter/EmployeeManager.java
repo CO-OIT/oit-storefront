@@ -20,7 +20,14 @@ public class EmployeeManager{
 		//Delete user
 		//
 		
+		public EmployeeManager() {	
+			errors = new ArrayList();
+		}
 		
+		public List<String> getErrors() {
+		   return errors;
+		}
+			
 		//TODO determine whether add should also update
 		public boolean addEmployee(			
 				String agency, 
@@ -32,8 +39,9 @@ public class EmployeeManager{
 				String positionNum,
 				String unit) {
 				
-			    errors = new ArrayList<String>();
-
+			
+			    errors.clear();
+			    
 			    StringChecker stringChecker = new StringChecker();
 			    			    
 			    //TODO: Add more data error checks here
@@ -45,23 +53,6 @@ public class EmployeeManager{
 			       errors.add("Not a valid email");
 			    }
 	            
-			    if (errors.size() == 0)
-			    {
-			    	
-			    }
-			    
-			    else
-			    {
-			    	
-			    	
-			    }
-			    
-			    
-			    
-	
-		
-		
-		
 			
 			EntityManager em = EMF.get().createEntityManager();
 			Employee emp = new Employee();
@@ -179,6 +170,7 @@ public class EmployeeManager{
 			TypedQuery<Employee> myQuery;
 			List<Employee> results = null;
 	
+			errors.clear();
 			
 			try
 			{
@@ -202,61 +194,76 @@ public class EmployeeManager{
 			return results;	
 			
 		}
-		
-	public boolean deleteEmploye(String email){
-			
-			EntityManager em = EMF.get().createEntityManager();
-			boolean success = false;
-		
-			TypedQuery<Employee> myQuery;
-			Employee result = null;
-			
-			myQuery = em.createQuery("SELECT e FROM Employee e where e.email = :email", Employee.class);
-			myQuery.setParameter("email", email);
-			
-			try 
-			{
-				result = myQuery.getSingleResult();
-				success = true;
-			}
-			catch (NoResultException e)
-			{
-				success = false;
-			}
-			
-			
-			if (success)
-			{
+	
+	
+	//Inactivate employee
+	public void deleteEmployee(String eid) {
 				
-				try
-				{
-				
-					// BEGIN TRANSACTION
-					em.getTransaction().begin();
-					// ADD EQUIPMENT
-					
-					Employee managed = em.merge(result);
-					
-					em.remove(managed);
-			
-				    // WRITE RECORD TO DATASTORE
-				    //Employee managed = em.merge(emp);
-				    			    
-				    
-				    // COMMIT ENTRIES
-				    em.getTransaction().commit();
-			
-				    success = true;
+		    String qry = "SELECT e FROM Employee e where e.eid = :eid";
 		    
-				}
-			    catch (Exception e){
-			    	success = false;
-			    }
-	
-			}
-	
-			return success;
+		    //Return singleton EntityManager (Google)
+			EntityManager em = EMF.get().createEntityManager();
+
+			Employee result = null;
+		    int numResults = 0;
 			
+		    errors.clear();
+		    
+		    TypedQuery<Employee> myQuery;				
+		    
+			if (!StringChecker.isValidEID(eid))
+			{
+				errors.add(String.format("EID %s is invalid", eid));
+			}
+			
+			//Good EID (as far as we know) so proceed
+			else {
+
+				myQuery = em.createQuery(qry, Employee.class);			
+				myQuery.setParameter("eid", eid);
+				
+		     //  --- Make sure there is only one record with this EID ---
+
+				numResults = myQuery.getMaxResults();
+			
+				//No results, bad EID
+				if (numResults == 0) {
+					errors.add(String.format("No record with eid %s was found", eid));
+				}
+			
+				//More than one record with this EID.  The datastore needs to be
+				// adjusted.
+				else if (numResults > 1) {
+					errors.add(String.format("More than one record for eid %s", eid));
+				}
+
+				//One record, as expected
+				else {
+					try {
+						result = myQuery.getSingleResult();
+						// BEGIN TRANSACTION
+						em.getTransaction().begin();
+								
+						//Necessary for agency?
+						Employee managed = em.merge(result);
+						managed.setActive(false);
+
+						// COMMIT ENTRIES
+						em.getTransaction().commit();
+					}
+				
+					catch (Exception e){
+						//TODO log exception
+						throw e;
+					}
+				
+					finally {
+						if (em.getTransaction().isActive()) {
+							em.getTransaction().rollback();
+						}
+					}
+				}
+			}		
 		}
 		
 	public boolean deleteEquipment(){
