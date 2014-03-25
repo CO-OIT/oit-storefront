@@ -5,9 +5,7 @@ import javax.persistence.*;
 @Entity(name = "Employee") 
 public class Employee {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long employeeKey;
+	@Id	
 	private int eid;
 	
 	@OneToOne(mappedBy="agency")
@@ -20,6 +18,9 @@ public class Employee {
 	private String phone2;
     private String positionNum;
     private boolean active;
+    
+    public Employee() {}
+    public Employee(int in_eid) { eid = in_eid; }
 	    
     public String getEmployeeName() {
 		return employeeName;

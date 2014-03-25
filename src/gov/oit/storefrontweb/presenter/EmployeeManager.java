@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -31,138 +32,77 @@ public class EmployeeManager{
 		//TODO determine whether add should also update
 		public boolean addEmployee(			
 				String agency, 
-				String eid, 
+				int eid, 
 				String email, 
 				String employeeName,
 				String phone1,
 				String phone2,
 				String positionNum,
-				String unit) {
+				String unit,
+				boolean active) {
 				
-			
+			    boolean newRec = false;
 			    errors.clear();
 			    
 			    StringChecker stringChecker = new StringChecker();
 			    			    
 			    //TODO: Add more data error checks here
-			    if (!stringChecker.isValidEID(eid)) {
-			    	errors.add("Not a valid EID");
-			    }
-			    
 			    if (!stringChecker.isValidEmail(email)) {
 			       errors.add("Not a valid email");
 			    }
 	            
 			
 			EntityManager em = EMF.get().createEntityManager();
-			Employee emp = new Employee();
 			ObjectValidator validator = new ObjectValidator();
 			
-			//TODO: Set properties here
-			
-		    if (validator.checkForDuplicate(emp)) 
-		    {
-		    	return false;
-		    }
-		    else
-		    {
-		    	try
-				{
 				
-			    // BEGIN TRANSACTION RECORD FOR ROLLBACK IF NEEDED 
-			    em.getTransaction().begin();
-			    
-			    // WRITE EMPLOYEE TO DATASTORE
-			    em.persist(emp);
-			    
-			    // COMMIT ENTRIES
-			    em.getTransaction().commit();
-			    
-				}
-					
-				catch (Exception e)
-				{
-					return false;
-				}
+		// BEGIN TRANSACTION RECORD FOR ROLLBACK IF NEEDED 
+			EntityTransaction txn = em.getTransaction();
+			
+			txn.begin();
 		
-				finally
-				{
-					em.close();
-				}
-		 }
-		 
-	
+			try {
+		    //Either get the existing Employee record or create a new one
+			Employee employee = em.find(Employee.class, eid);	
+			
+			if (employee == null) { 
+				employee = new Employee(eid); 
+			    newRec = true;	
+			}
+			
+			
+			//Set fields
+			employee.setActive(active);
+			employee.setEmail(email);
+			employee.setEmployeeName(employeeName);
+			employee.setPhone1(phone1);
+			employee.setPhone2(phone2);
+			employee.setPositionNum(positionNum);
+			employee.setUnit(unit);
+			
+			if (newRec) {
+			  em.persist(employee);
+			}
+			
+			else {
+			  em.merge(employee);
+			}
+			
+			// COMMIT ENTRIES
+			txn.commit();
+		
+		    } finally {
+			  if (txn.isActive()) { txn.rollback(); }
+		    }
+			
+		    em.close();
 			
 			return true;
 		}
 	
-	public boolean addEquipment(String eqType, String eqName, String email){
-			
-			EntityManager em = EMF.get().createEntityManager();
-			boolean success = false;
-			Employee managed = null;
-			Employee result = new Employee();
-			
-			TypedQuery<Employee> myQuery;
 	
-			//TODO: Update queries for storefront employees
-			myQuery = em.createQuery("SELECT e FROM Employee e where e.email = :email", Employee.class);
-			myQuery.setParameter("email", email);
-			
-			try 
-			{
-				
-				result = myQuery.getSingleResult();
-				managed = em.merge(result);
-				success = true;
-			}
-			catch (NoResultException e)
-			{
-				success = false;
-			}
-			
-			
-			if (success)
-			{
-				
-				try
-				{
-				
-					// BEGIN TRANSACTION
-					em.getTransaction().begin();
-					
-					
-					//TODO Add any embedded objects
-					//eq.setEquipmentName(eqName);
-					//eq.setEquipmentType(eqType);
-					////eq.setOwner(managed);
-					
-					// ADD EQUIPMENT
-					
-					//managed.addEquipment(eq);
-					
-					
-					//managed.addEquipment(eq);
-				
-					
-				    // WRITE RECORD TO DATASTORE
-				    em.getTransaction().commit();
-			
-				    success = true;
-		    
-				}
-			    /*catch (Exception e){
-			    	success = false;
-			    }
-	*/
-				finally{}
-				
-				
-			}
-	
-			return success;
-			
-		}
+		
+		
 		
 	public List<Employee> retrieveEmployeeList(){
 			
@@ -174,7 +114,6 @@ public class EmployeeManager{
 			
 			try
 			{
-			
 				myQuery = em.createQuery("SELECT e FROM Employee e", Employee.class);
 				results = myQuery.getResultList();    
 				results = em.merge(results);
@@ -186,6 +125,7 @@ public class EmployeeManager{
 				
 				
 			}
+			
 			finally
 			{
 				em.close();
