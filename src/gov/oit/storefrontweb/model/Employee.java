@@ -6,10 +6,10 @@ import javax.persistence.*;
 public class Employee {
 	
 	@Id	
-	private int eid;
+	private long eid;
 	
-	@OneToOne(mappedBy="agency")
-	private Agency agency;
+	//@OneToOne(mappedBy="agency")
+	//private Agency agency;
 	
 	private String unit;
 	private String employeeName; //Replace with Google record
@@ -20,7 +20,7 @@ public class Employee {
     private boolean active;
     
     public Employee() {}
-    public Employee(int in_eid) { eid = in_eid; }
+    public Employee(long in_eid) { eid = in_eid; }
 	    
     public String getEmployeeName() {
 		return employeeName;
@@ -40,10 +40,10 @@ public class Employee {
 	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
-	public int getEid() {
+	public long getEid() {
 		return eid;
 	}
-	public void setEid(int eid) {
+	public void setEid(long eid) {
 		this.eid = eid;
 	}
 	public String getEmail() {
@@ -58,19 +58,19 @@ public class Employee {
 	public void setPositionNum(String positionNum) {
 		this.positionNum = positionNum;
 	}
-	public Agency getAgency() {
+/*	public Agency getAgency() {
 		return agency;
 	}
 	public void setAgency(Agency agency) {
 		this.agency = agency;
-	}
+	}*/
 	public String getUnit() {
 		return unit;
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 	public void setActive(boolean active) {

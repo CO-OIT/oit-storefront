@@ -28,11 +28,25 @@ public class EmployeeManager{
 		public List<String> getErrors() {
 		   return errors;
 		}
-			
+		
+		public boolean addEmployee(Employee employee)
+		{
+		       return addEmployee(
+		    		   employee.getEid(),
+		    		   employee.getEmail(),
+		    		   employee.getEmployeeName(),
+		    		   employee.getPhone1(),
+		    		   employee.getPhone2(),
+		    		   employee.getPositionNum(),
+		    		   employee.getUnit(),
+		    		   employee.getActive());
+		}
+		
+		
 		//TODO determine whether add should also update
 		public boolean addEmployee(			
-				String agency, 
-				int eid, 
+				
+				long eid, 
 				String email, 
 				String employeeName,
 				String phone1,
@@ -80,13 +94,13 @@ public class EmployeeManager{
 			employee.setPositionNum(positionNum);
 			employee.setUnit(unit);
 			
-			if (newRec) {
+			//if (newRec) {
 			  em.persist(employee);
-			}
+			//}
 			
-			else {
-			  em.merge(employee);
-			}
+			//else {
+			//  em.merge(employee);
+			//}
 			
 			// COMMIT ENTRIES
 			txn.commit();

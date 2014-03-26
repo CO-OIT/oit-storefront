@@ -16,6 +16,16 @@
     <url-pattern>/storefront/greet</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>test1Servlet</servlet-name>
+    <url-pattern>/test1</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>test1Servlet</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.presenter.Test1Servlet</servlet-class>
+  </servlet>  
+  
   <servlet>
 		<servlet-name>EMPLOYEELIST</servlet-name>
 		<servlet-class>gov.oit.storefrontweb.presenter.EmployeeList</servlet-class>
@@ -37,7 +47,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Storefront.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
