@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import gov.oit.storefrontweb.model.Employee;
 //import model.Equipment;
@@ -61,9 +62,9 @@ public class EmployeeManager{
 			    StringChecker stringChecker = new StringChecker();
 			    			    
 			    //TODO: Add more data error checks here
-			    if (!stringChecker.isValidEmail(email)) {
-			       errors.add("Not a valid email");
-			    }
+			   // if (!stringChecker.isValidEmail(email)) {
+			   //    errors.add("Not a valid email");
+			   // }
 	            
 			
 			EntityManager em = EMF.get().createEntityManager();
@@ -71,20 +72,23 @@ public class EmployeeManager{
 			
 				
 		// BEGIN TRANSACTION RECORD FOR ROLLBACK IF NEEDED 
-			EntityTransaction txn = em.getTransaction();
-			
+			EntityTransaction txn = em.getTransaction();			
 			txn.begin();
 		
 			try {
-		    //Either get the existing Employee record or create a new one
-			Employee employee = em.find(Employee.class, eid);	
+		    //Temp for debugging
+			Employee employee = null;
+				
+				
+			//Either get the existing Employee record or create a new one
+			//Employee employee = em.find(Employee.class, eid);	
 			
-			if (employee == null) { 
-				employee = new Employee(eid); 
-			    newRec = true;	
-			}
+			//if (employee == null) { 
+			//	employee = new Employee(eid); 
+			//    newRec = true;	
+			//}
 			
-			
+			employee = new Employee(eid);
 			//Set fields
 			employee.setActive(active);
 			employee.setEmail(email);
@@ -118,25 +122,43 @@ public class EmployeeManager{
 		
 		
 		
+	@SuppressWarnings("unchecked")
 	public List<Employee> retrieveEmployeeList(){
 			
 			EntityManager em = EMF.get().createEntityManager();
+			//TypedQuery<Employee> myQuery;
 			TypedQuery<Employee> myQuery;
-			List<Employee> results = null;
-	
-			errors.clear();
+			List<Employee> finalResults = new ArrayList();
 			
+				
 			try
 			{
-				myQuery = em.createQuery("SELECT e FROM Employee e", Employee.class);
-				results = myQuery.getResultList();    
-				results = em.merge(results);
+				String qry = "SELECT e FROM Employee e";
+
+				//myQuery = em.createQuery(qry, Employee.class);
+				
+				//EntityTransaction tn = em.getTransaction();
+				//tn.begin();
+				
+				myQuery = em.createQuery(qry,Employee.class);
+				
+				List<Employee> results = myQuery.getResultList();
+				
+				System.out.println(results.size());
+				
+				Employee e1 = results.get(0);
+				
+				
+				//results = myQuery.getResultList();    
+				//finalResults = em.merge(results);
+				finalResults = results;
+				
 				em.clear();
 			}
 			
 			catch(Exception e)
 			{
-				
+				System.out.println(e.getMessage());
 				
 			}
 			
@@ -145,7 +167,8 @@ public class EmployeeManager{
 				em.close();
 			}
 			
-			return results;	
+			
+			return finalResults;	
 			
 		}
 	
@@ -255,7 +278,53 @@ public class EmployeeManager{
 			return results;
 			
 		}*/
+	
+	
+	public List<Employee> searchByName(String name)
+	{
+		List<Employee> results = null;
 		
+		EntityManager em = EMF.get().createEntityManager();
+		TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e WHERE e.employeeName LIKE ':name%'", Employee.class);
+		query.setParameter("name", name);
+
+		results = query.getResultList();
+		results = em.merge(results);
+		
+		return results;		
+	}
+	
+	
+	public Employee searchByEid(long eid) 
+	{
+		Employee employeeResult = null;
+		EntityManager em = EMF.get().createEntityManager();
+		
+		try {
+		//String qryString = "SELECT emp FROM Employee emp where emp.eid = :eid";
+		//TypedQuery<Employee> qryObject = em.createQuery(qryString, Employee.class);
+		//qryObject.setParameter("eid",eid);
+		
+		//employeeResult = qryObject.getSingleResult();
+		
+		employeeResult = em.find(Employee.class, eid);
+				
+		}
+
+		catch(Exception e) {
+		   System.out.println(e.getMessage());
+		}
+		
+		finally {
+		em.close();
+		}
+		
+		
+		return employeeResult;
+		
+	}
+	
+	
 		@SuppressWarnings("finally")
 	public boolean eraseAllRecords(){
 			//THIS WILL DELETE THE EMPLOYEES AND ALSO REMOVE THE CHILD RECORDS

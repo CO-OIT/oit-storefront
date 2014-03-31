@@ -1,11 +1,18 @@
 package gov.oit.storefrontweb.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
+import com.google.appengine.api.datastore.Key;
+
 @Entity(name = "Employee") 
-public class Employee {
+public class Employee implements Serializable {
 	
-	@Id	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Key key;
+	
 	private long eid;
 
 	//@OneToOne(mappedBy="agency")
@@ -22,6 +29,7 @@ public class Employee {
     public Employee() {}
     public Employee(long in_eid) { eid = in_eid; }
 	    
+    
     public String getEmployeeName() {
 		return employeeName;
 	}
@@ -76,5 +84,9 @@ public class Employee {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	 public Key getKey() {
+	        return key;
+	    }
 
 }

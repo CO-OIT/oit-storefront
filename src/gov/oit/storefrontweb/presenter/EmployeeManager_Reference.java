@@ -131,11 +131,9 @@ public class EmployeeManager_Reference{
 			EntityManager em = EMF.get().createEntityManager();
 			TypedQuery<Employee> myQuery;
 			List<Employee> results = null;
-	
-			
+				
 			try
-			{
-			
+			{		
 				myQuery = em.createQuery("SELECT e FROM Employee e", Employee.class);
 				results = myQuery.getResultList();    
 				results = em.merge(results);
@@ -145,15 +143,14 @@ public class EmployeeManager_Reference{
 			catch(Exception e)
 			{
 				
-				
 			}
+			
 			finally
 			{
 				em.close();
 			}
 			
 			return results;	
-			
 		}
 		
 	public boolean deleteEmploye(String email){

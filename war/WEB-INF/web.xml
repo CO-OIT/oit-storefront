@@ -6,45 +6,39 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>gov.oit.storefrontweb.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/storefront/greet</url-pattern>
-  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>test1Servlet</servlet-name>
     <url-pattern>/test1</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+    <servlet-name>empSearchEidServlet</servlet-name>
+    <url-pattern>/empSearchEid</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+      <servlet-name>empSearchEidServlet</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.EmployeeSearchEidServlet</servlet-class>
+  </servlet>  
+
   <servlet>
       <servlet-name>test1Servlet</servlet-name>
       <servlet-class>gov.oit.storefrontweb.presenter.Test1Servlet</servlet-class>
   </servlet>  
   
-  <servlet>
-		<servlet-name>EMPLOYEELIST</servlet-name>
-		<servlet-class>gov.oit.storefrontweb.presenter.EmployeeList</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>CLEANUP</servlet-name>
-		<servlet-class>gov.oit.storefrontweb.presenter.cleanUp</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>EMPLOYEELIST</servlet-name>
-		<url-pattern>/employeelist</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CLEANUP</servlet-name>
-		<url-pattern>/cleanUp</url-pattern>
-	</servlet-mapping>
+ 
+  <servlet-mapping>
+    <servlet-name>employeeListServlet</servlet-name>
+    <url-pattern>/employeeList</url-pattern>
+  </servlet-mapping>
   
-  
+    <servlet>
+		<servlet-name>employeeListServlet</servlet-name>
+		<servlet-class>gov.oit.storefrontweb.servlet.EmployeeListServlet</servlet-class>
+	</servlet>
+ 
+    
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
