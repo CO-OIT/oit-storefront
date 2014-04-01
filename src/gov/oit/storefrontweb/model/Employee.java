@@ -5,31 +5,33 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity(name = "Employee") 
 public class Employee implements Serializable {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Key key;
-	
-	private long eid;
-
+			
 	//@OneToOne(mappedBy="agency")
 	//private Agency agency;
 	
 	private String unit;
+	
+	@Column(nullable=false)
 	private String employeeName; //Replace with Google record
+
+	@Column(nullable=false)
+	private long eid;
+
 	private String email;
 	private String phone1;
 	private String phone2;
     private String positionNum;
     private boolean active;
     
-    public Employee() {}
-    public Employee(long in_eid) { eid = in_eid; }
-	    
-    
+    public Employee(long in_eid) { eid = in_eid; this.setKey(in_eid); }
+	        
     public String getEmployeeName() {
 		return employeeName;
 	}
@@ -54,6 +56,11 @@ public class Employee implements Serializable {
 	public void setEid(long eid) {
 		this.eid = eid;
 	}
+	
+	public void setKey(long eid) {
+		this.key = KeyFactory.createKey("Employee", eid);	
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -85,7 +92,7 @@ public class Employee implements Serializable {
 		this.active = active;
 	}
 	
-	 public Key getKey() {
+	public Key getKey() {
 	        return key;
 	    }
 

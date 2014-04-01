@@ -15,9 +15,10 @@ public class EmployeeManager_Reference{
 
 	  public boolean addNew()
 	  {
-		
+		    long bogusEid = 999999;
+		  
 			EntityManager em = EMF.get().createEntityManager();
-			Employee emp = new Employee();
+			Employee emp = new Employee(bogusEid);
 			ObjectValidator validator = new ObjectValidator();
 			
 			//TODO: Set properties here
@@ -63,7 +64,7 @@ public class EmployeeManager_Reference{
 			EntityManager em = EMF.get().createEntityManager();
 			boolean success = false;
 			Employee managed = null;
-			Employee result = new Employee();
+			Employee result = new Employee(99999999);
 			
 			TypedQuery<Employee> myQuery;
 	
@@ -308,7 +309,7 @@ public class EmployeeManager_Reference{
 				
 				
 				EntityManager em = EMF.get().createEntityManager();
-				Employee emp = new Employee();
+				Employee emp = new Employee(9999999);
 				ObjectValidator validator = new ObjectValidator();
 				
 				//TODO: Set properties here

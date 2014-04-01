@@ -119,40 +119,24 @@ public class EmployeeManager{
 		}
 	
 	
-		
-		
-		
 	@SuppressWarnings("unchecked")
 	public List<Employee> retrieveEmployeeList(){
 			
 			EntityManager em = EMF.get().createEntityManager();
 			//TypedQuery<Employee> myQuery;
 			TypedQuery<Employee> myQuery;
-			List<Employee> finalResults = new ArrayList();
+			List<Employee> results = new ArrayList();
 			
-				
 			try
 			{
-				String qry = "SELECT e FROM Employee e";
-
-				//myQuery = em.createQuery(qry, Employee.class);
-				
-				//EntityTransaction tn = em.getTransaction();
-				//tn.begin();
+				String qry = "SELECT e FROM Employee e WHERE employeeName is not null";
 				
 				myQuery = em.createQuery(qry,Employee.class);
 				
-				List<Employee> results = myQuery.getResultList();
-				
-				System.out.println(results.size());
-				
-				Employee e1 = results.get(0);
 				
 				
-				//results = myQuery.getResultList();    
-				//finalResults = em.merge(results);
-				finalResults = results;
-				
+				results = myQuery.getResultList();
+								
 				em.clear();
 			}
 			
@@ -167,9 +151,7 @@ public class EmployeeManager{
 				em.close();
 			}
 			
-			
-			return finalResults;	
-			
+			return results;	
 		}
 	
 	
@@ -285,11 +267,12 @@ public class EmployeeManager{
 		List<Employee> results = null;
 		
 		EntityManager em = EMF.get().createEntityManager();
+		
 		TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e WHERE e.employeeName LIKE ':name%'", Employee.class);
 		query.setParameter("name", name);
 
 		results = query.getResultList();
-		results = em.merge(results);
+		//results = em.merge(results);
 		
 		return results;		
 	}
@@ -301,14 +284,7 @@ public class EmployeeManager{
 		EntityManager em = EMF.get().createEntityManager();
 		
 		try {
-		//String qryString = "SELECT emp FROM Employee emp where emp.eid = :eid";
-		//TypedQuery<Employee> qryObject = em.createQuery(qryString, Employee.class);
-		//qryObject.setParameter("eid",eid);
-		
-		//employeeResult = qryObject.getSingleResult();
-		
-		employeeResult = em.find(Employee.class, eid);
-				
+			employeeResult = em.find(Employee.class, eid);	
 		}
 
 		catch(Exception e) {
