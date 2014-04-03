@@ -133,8 +133,7 @@ public class EmployeeManager{
 				
 				myQuery = em.createQuery(qry,Employee.class);
 				
-				
-				
+					
 				results = myQuery.getResultList();
 								
 				em.clear();
@@ -264,7 +263,7 @@ public class EmployeeManager{
 	
 	public List<Employee> searchByName(String name)
 	{
-		List<Employee> results = null;
+	/*	List<Employee> results = null;
 		
 		EntityManager em = EMF.get().createEntityManager();
 		
@@ -274,8 +273,39 @@ public class EmployeeManager{
 		results = query.getResultList();
 		//results = em.merge(results);
 		
-		return results;		
+		return results;		*/
+		
+		EntityManager em = EMF.get().createEntityManager();
+		//TypedQuery<Employee> myQuery;
+		Query myQuery;
+		List<Employee> results = new ArrayList();
+		
+		try
+		{
+			String qry = "SELECT e FROM Employee e";
+			
+			myQuery = em.createQuery(qry);
+		
+
+			results = myQuery.getResultList();
+							
+			em.clear();
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			
+		}
+		
+		finally
+		{
+			em.close();
+		}
+		
+		return results;	
 	}
+
 	
 	
 	public Employee searchByEid(long eid) 
