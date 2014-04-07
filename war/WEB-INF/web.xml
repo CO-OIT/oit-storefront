@@ -6,6 +6,16 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+    
+  <servlet-mapping>
+    <servlet-name>testAddAgencyServlet</servlet-name>
+    <url-pattern>/testAddAgency</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>testAddOSServlet</servlet-name>
+    <url-pattern>/testAddOS</url-pattern>
+  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>test1Servlet</servlet-name>
@@ -16,6 +26,18 @@
     <servlet-name>empSearchEidServlet</servlet-name>
     <url-pattern>/empSearchEid</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>testAddOSServlet</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.TestOSServlet</servlet-class>
+  </servlet>  
+  
+  
+  <servlet>
+      <servlet-name>testAddAgencyServlet</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.TestAgencyServlet</servlet-class>
+  </servlet>  
+  
   
     <servlet>
       <servlet-name>empSearchEidServlet</servlet-name>
