@@ -32,7 +32,6 @@
       <servlet-class>gov.oit.storefrontweb.servlet.TestOSServlet</servlet-class>
   </servlet>  
   
-  
   <servlet>
       <servlet-name>testAddAgencyServlet</servlet-name>
       <servlet-class>gov.oit.storefrontweb.servlet.TestAgencyServlet</servlet-class>

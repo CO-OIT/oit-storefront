@@ -5,28 +5,37 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+
 @Entity(name = "OitService") 
-public class OitService {
+public class OitService extends ActiveRecord {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long oitServiceKey;
+	private Key key;
 
+	private String oitServiceId;
 	private String serviceName;
 	private String description;
 	
-	@ManyToOne()
-	private Agency agency;
+//	@ManyToOne()
+//	private Agency agency;
 	
 	private Date dateAddedToSP;
 	private Date fundedThroughDate;
 	private Boolean active;
-	private List<SPKeyword> keywords;
+	//private List<SPKeyword> keywords;
 	
-	@OneToOne()
-	private ServiceCategory serviceCategory;
+//	@OneToOne()
+//	private ServiceCategory serviceCategory;
     
 	private List<String> serviceClassifications; //Replace with List<ServiceClassifications>
+	
+	public OitService(String oitServiceId) {
+		this.oitServiceId = oitServiceId;
+		this.setKey(oitServiceId);
+	}
+	
 	
 	public String getServiceName() {
 		return serviceName;
@@ -40,12 +49,12 @@ public class OitService {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Agency getAgency() {
-		return agency;
-	}
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-	}
+//	public Agency getAgency() {
+//		return agency;
+//	}
+//	public void setAgency(Agency agency) {
+//		this.agency = agency;
+//	}
 	public Date getDateAddedToSP() {
 		return dateAddedToSP;
 	}
@@ -64,18 +73,19 @@ public class OitService {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	public List<SPKeyword> getKeywords() {
-		return keywords;
-	}
-	public void setKeywords(List<SPKeyword> keywords) {
-		this.keywords = keywords;
-	}
-	public ServiceCategory getServiceCategory() {
-		return serviceCategory;
-	}
-	public void setServiceCategory(ServiceCategory serviceCategory) {
-		this.serviceCategory = serviceCategory;
-	}
+	
+//	public List<SPKeyword> getKeywords() {
+//		return keywords;
+//	}
+//	public void setKeywords(List<SPKeyword> keywords) {
+//		this.keywords = keywords;
+//	}
+//	public ServiceCategory getServiceCategory() {
+//		return serviceCategory;
+//	}
+//	public void setServiceCategory(ServiceCategory serviceCategory) {
+//		this.serviceCategory = serviceCategory;
+//	}
 	public List<String> getServiceClassifications() {
 		return serviceClassifications;
 	}
@@ -83,9 +93,13 @@ public class OitService {
 		this.serviceClassifications = serviceClassifications;
 	}
 	
-	public int commit()
-	{
-		return -1;
-	}
+	 // Key	
+		public void setKey(String oitServiceId) {
+			this.key = KeyFactory.createKey("OitService", oitServiceId);	
+		}
+
+		public Key getKey() {
+	        return key;
+	    }
 	
 }
