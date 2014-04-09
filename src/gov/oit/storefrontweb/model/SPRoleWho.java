@@ -9,7 +9,7 @@ public class SPRoleWho {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long spRoleWhoKey;
 	private Employee employee;
-	private OitService oitService;
+	//private OitService oitService;
 	private SPRoleClassification spRoleClassification;
 	public Employee getEmployee() {
 		return employee;
@@ -17,12 +17,12 @@ public class SPRoleWho {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	public OitService getOitService() {
-		return oitService;
-	}
-	public void setOitService(OitService oitService) {
-		this.oitService = oitService;
-	}
+//	public OitService getOitService() {
+//		return oitService;
+//	}
+//	public void setOitService(OitService oitService) {
+//		this.oitService = oitService;
+//	}
 	public SPRoleClassification getSpRoleClassification() {
 		return spRoleClassification;
 	}

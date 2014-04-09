@@ -1,6 +1,9 @@
 package gov.oit.storefrontweb.model;
 
+import gov.oit.storefrontweb.shared.EMF;
+
 import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -9,7 +12,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity(name = "OitService") 
-public class OitService extends ActiveRecord {
+public class OitService extends ActiveRecord  {
 
 	@Id
 	private Key key;
@@ -102,4 +105,26 @@ public class OitService extends ActiveRecord {
 	        return key;
 	    }
 	
+		
+//		public void Save() {
+//			
+//			EntityManager em = EMF.get().createEntityManager();
+//						
+//		// BEGIN TRANSACTION RECORD FOR ROLLBACK IF NEEDED 
+//			EntityTransaction txn = em.getTransaction();			
+//			txn.begin();
+//		
+//			try {
+//			  em.persist(this);
+//			
+//			// COMMIT ENTRIES
+//			txn.commit();
+//		
+//		    } finally {
+//			  if (txn.isActive()) { txn.rollback(); }
+//		    }
+//			
+//		    em.close();		
+//		}
+
 }

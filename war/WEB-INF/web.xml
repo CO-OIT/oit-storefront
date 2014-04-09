@@ -6,6 +6,17 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+   
+  <servlet-mapping>
+    <servlet-name>masterTestService</servlet-name>
+    <url-pattern>/masterTest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>masterTestService</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.MasterTestService</servlet-class>
+  </servlet>  
+    
     
   <servlet-mapping>
     <servlet-name>testAddAgencyServlet</servlet-name>
