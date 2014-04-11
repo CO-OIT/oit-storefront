@@ -8,7 +8,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity(name = "Agency") 
-public class Agency {
+public class Agency extends ActiveRecord {
 	
 
 	// Columns

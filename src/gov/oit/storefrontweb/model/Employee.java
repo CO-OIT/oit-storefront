@@ -8,7 +8,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity(name = "Employee") 
-public class Employee implements Serializable {
+public class Employee extends ActiveRecord implements Serializable {
 	
 	@Id
     private Key key;
