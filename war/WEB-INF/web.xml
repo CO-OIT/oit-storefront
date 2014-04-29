@@ -6,6 +6,17 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
+  <servlet-mapping>
+    <servlet-name>runbook</servlet-name>
+    <url-pattern>/runbook</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>runbook</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.RunbookServlet</servlet-class>
+  </servlet> 
+   
+   
    
   <servlet-mapping>
     <servlet-name>masterTestService</servlet-name>
