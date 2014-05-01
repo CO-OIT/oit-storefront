@@ -66,7 +66,40 @@ public class RunBookManager {
 			  
 			  ServiceOverview serviceOverview = new ServiceOverview();
 			 
-			  //Here there be dragons
+			  
+				serviceOverview.set_appName(ent.getProperty("appName").toString());
+				serviceOverview.set_agencyKey(ent.getProperty("agencyKey").toString());
+				serviceOverview.set_catKey(ent.getProperty("catKey").toString());
+				serviceOverview.set_functionalServiceKey(ent.getProperty("functionalServiceKey").toString());
+				serviceOverview.set_businessOwner(ent.getProperty("businessOwner").toString());
+				serviceOverview.set_portfolioKey(ent.getProperty("portfolioKey").toString());
+				serviceOverview.set_priorityKey(ent.getProperty("priorityKey").toString());
+				serviceOverview.set_appArchKey(ent.getProperty("appArchKey").toString());
+				serviceOverview.set_webPlatformKey(ent.getProperty("webPlatformKey").toString());
+				serviceOverview.set_appPlatformKey(ent.getProperty("appPlatformKey").toString());
+				serviceOverview.set_portfolioManager(ent.getProperty("portfolioManager").toString());
+				serviceOverview.set_appManager(ent.getProperty("appManager").toString());
+				serviceOverview.set_solArchitect(ent.getProperty("solArchitect").toString());
+				serviceOverview.set_leadEngineer(ent.getProperty("leadEngineer").toString());
+				serviceOverview.set_t1Support(ent.getProperty("t1Support").toString());
+				serviceOverview.set_t2Support(ent.getProperty("t2Support").toString());
+				serviceOverview.set_t3Support(ent.getProperty("t3Support").toString());
+				serviceOverview.set_dataClassification(ent.getProperty("dataClassification").toString());
+				serviceOverview.set_databaseDeveloper(ent.getProperty("databaseDeveloper").toString());
+				serviceOverview.set_databaseAdministrator(ent.getProperty("databaseAdministrator").toString());
+				serviceOverview.set_lanClassKey(ent.getProperty("lanClassKey").toString());
+				serviceOverview.set_siteGatewayKey(ent.getProperty("siteGatewayKey").toString());
+				serviceOverview.set_dcVlanZone(ent.getProperty("dcVlanZone").toString());
+				serviceOverview.set_agencyLanEngineer(ent.getProperty("agencyLanEngineer").toString());
+				serviceOverview.set_dcLanEngineer(ent.getProperty("dcLanEngineer").toString());
+				serviceOverview.set_secopsEngineer(ent.getProperty("secopsEngineer").toString());
+				serviceOverview.set_serverPlatformKey(ent.getProperty("serverPlatformKey").toString());
+				serviceOverview.set_hypervisorKey(ent.getProperty("hypervisorKey").toString());
+				serviceOverview.set_hostOsKey(ent.getProperty("hostOsKey").toString());
+				serviceOverview.set_guestOsKey(ent.getProperty("guestOsKey").toString());
+				serviceOverview.set_serverHostingManager(ent.getProperty("serverHostingManager").toString());
+				serviceOverview.set_serverAdmin(ent.getProperty("serverAdmin").toString());
+				serviceOverview.set_storageAdmin(ent.getProperty("storageAdmin").toString());
 			  
 			  
 			  return serviceOverview;
