@@ -388,13 +388,5 @@ public class ServiceOverview {
 	public void set_key(String _key) {
 		this._key = _key;
 	}
-
-//Methods
-	
-
-	 
-	
-	
-	
 	
 }

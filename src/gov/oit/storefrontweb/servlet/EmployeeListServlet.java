@@ -1,7 +1,7 @@
 package gov.oit.storefrontweb.servlet;
 
+import gov.oit.storefrontweb.manager.EmployeeManager;
 import gov.oit.storefrontweb.model.Employee;
-import gov.oit.storefrontweb.presenter.EmployeeManager;
 
 import java.io.IOException;
 import java.util.List;

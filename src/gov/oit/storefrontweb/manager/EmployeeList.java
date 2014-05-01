@@ -1,13 +1,12 @@
-package gov.oit.storefrontweb.presenter;
+package gov.oit.storefrontweb.manager;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.*;
 
+import gov.oit.storefrontweb.manager.EmployeeManager;
 import gov.oit.storefrontweb.model.Employee;
-import gov.oit.storefrontweb.presenter.EmployeeManager;
-//import model.Equipment;
 
 
 @SuppressWarnings("serial")

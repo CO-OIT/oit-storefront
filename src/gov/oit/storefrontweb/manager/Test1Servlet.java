@@ -1,4 +1,4 @@
-package gov.oit.storefrontweb.presenter;
+package gov.oit.storefrontweb.manager;
 
 import gov.oit.storefrontweb.model.Employee;
 

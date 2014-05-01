@@ -1,4 +1,4 @@
-package gov.oit.storefrontweb.presenter;
+package gov.oit.storefrontweb.manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,64 +9,31 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.Query;
 
+import gov.oit.storefrontweb.model.Agency;
 import gov.oit.storefrontweb.model.Employee;
 //import model.Equipment;
 import gov.oit.storefrontweb.shared.EMF;
 import gov.oit.storefrontweb.shared.ObjectValidator;
 import gov.oit.storefrontweb.shared.StringChecker;
 
-public class EmployeeManager{
+public class AgencyManager{
 	
-		private List<String> errors;
-		
-		//Delete user
-		//
-		
-		public EmployeeManager() {	
-			errors = new ArrayList();
+		public AgencyManager() {	
 		}
 		
-		public List<String> getErrors() {
-		   return errors;
-		}
-		
-		public boolean addEmployee(Employee employee)
+		public void addAgency(Agency agency)
 		{
-		       return addEmployee(
-		    		   employee.getEid(),
-		    		   employee.getEmail(),
-		    		   employee.getEmployeeName(),
-		    		   employee.getPhone1(),
-		    		   employee.getPhone2(),
-		    		   employee.getPositionNum(),
-		    		   employee.getUnit(),
-		    		   employee.getActive());
+		       addAgency( agency.getAgencyCode(), agency.getAgencyName() );
 		}
 		
 		
 		//TODO determine whether add should also update
-		public boolean addEmployee(			
-				
-				long eid, 
-				String email, 
-				String employeeName,
-				String phone1,
-				String phone2,
-				String positionNum,
-				String unit,
-				boolean active) {
-				
-			    boolean newRec = false;
-			    errors.clear();
-			    
+		public void addAgency(String agencyCode, String agencyName) {
+							    
 			    StringChecker stringChecker = new StringChecker();
 			    			    
 			    //TODO: Add more data error checks here
-			   // if (!stringChecker.isValidEmail(email)) {
-			   //    errors.add("Not a valid email");
-			   // }
-	            
-			
+ 	            			
 			EntityManager em = EMF.get().createEntityManager();
 			ObjectValidator validator = new ObjectValidator();
 			
@@ -76,46 +43,25 @@ public class EmployeeManager{
 			txn.begin();
 		
 			try {
-		    //Temp for debugging
-			Employee employee = null;
-				
-				
-			//Either get the existing Employee record or create a new one
-			//Employee employee = em.find(Employee.class, eid);	
 			
-			//if (employee == null) { 
-			//	employee = new Employee(eid); 
-			//    newRec = true;	
-			//}
+			    Agency agency = new Agency(agencyCode);
+			    agency.setAgencyName(agencyName);
 			
-			employee = new Employee(eid);
-			//Set fields
-			employee.setActive(active);
-			employee.setEmail(email);
-			employee.setEmployeeName(employeeName);
-			employee.setPhone1(phone1);
-			employee.setPhone2(phone2);
-			employee.setPositionNum(positionNum);
-			employee.setUnit(unit);
-			
-			//if (newRec) {
-			  em.persist(employee);
-			//}
-			
-			//else {
-			//  em.merge(employee);
-			//}
-			
-			// COMMIT ENTRIES
-			txn.commit();
+			    em.persist(agency);
+
+			    txn.commit();
 		
-		    } finally {
+		    } 
+			
+			catch (Exception ex) {
+				throw ex;
+			}
+			
+			finally {
 			  if (txn.isActive()) { txn.rollback(); }
 		    }
 			
-		    em.close();
-			
-			return true;
+		    em.close();			
 		}
 	
 	
@@ -155,7 +101,7 @@ public class EmployeeManager{
 	
 	
 	//Inactivate employee
-	public void deleteEmployee(String eid) {
+	public void deleteAgency(String eid) {
 				
 		    String qry = "SELECT e FROM Employee e where e.eid = :eid";
 		    
@@ -165,38 +111,17 @@ public class EmployeeManager{
 			Employee result = null;
 		    int numResults = 0;
 			
-		    errors.clear();
 		    
 		    TypedQuery<Employee> myQuery;				
-		    
-			if (!StringChecker.isValidEID(eid))
-			{
-				errors.add(String.format("EID %s is invalid", eid));
-			}
-			
-			//Good EID (as far as we know) so proceed
-			else {
-
+		    			
 				myQuery = em.createQuery(qry, Employee.class);			
 				myQuery.setParameter("eid", eid);
 				
 		     //  --- Make sure there is only one record with this EID ---
 
 				numResults = myQuery.getMaxResults();
-			
-				//No results, bad EID
-				if (numResults == 0) {
-					errors.add(String.format("No record with eid %s was found", eid));
-				}
-			
-				//More than one record with this EID.  The datastore needs to be
-				// adjusted.
-				else if (numResults > 1) {
-					errors.add(String.format("More than one record for eid %s", eid));
-				}
+						
 
-				//One record, as expected
-				else {
 					try {
 						result = myQuery.getSingleResult();
 						// BEGIN TRANSACTION
@@ -221,8 +146,6 @@ public class EmployeeManager{
 						}
 					}
 				}
-			}		
-		}
 		
 	public boolean deleteEquipment(){
 			
@@ -261,7 +184,7 @@ public class EmployeeManager{
 		}*/
 	
 	
-	public List<Employee> searchByName(String name)
+	public List<Agency> searchByName(String name)
 	{
 	/*	List<Employee> results = null;
 		
@@ -275,58 +198,62 @@ public class EmployeeManager{
 		
 		return results;		*/
 		
-		EntityManager em = EMF.get().createEntityManager();
-		//TypedQuery<Employee> myQuery;
-		Query myQuery;
-		List<Employee> results = new ArrayList();
+//		EntityManager em = EMF.get().createEntityManager();
+//		//TypedQuery<Employee> myQuery;
+//		Query myQuery;
+//		List<Employee> results = new ArrayList();
+//		
+//		try
+//		{
+//			String qry = "SELECT e FROM Employee e";
+//			
+//			myQuery = em.createQuery(qry);
+//		
+//
+//			results = myQuery.getResultList();
+//							
+//			em.clear();
+//		}
+//		
+//		catch(Exception e)
+//		{
+//			System.out.println(e.getMessage());
+//			
+//		}
+//		
+//		finally
+//		{
+//			em.close();
+//		}
+//		
+//		return results;	
 		
-		try
-		{
-			String qry = "SELECT e FROM Employee e";
-			
-			myQuery = em.createQuery(qry);
-		
-
-			results = myQuery.getResultList();
-							
-			em.clear();
-		}
-		
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-			
-		}
-		
-		finally
-		{
-			em.close();
-		}
-		
-		return results;	
+		return null;
 	}
 
 	
 	
-	public Employee searchByEid(long eid) 
+	public Agency searchByAgencyCode(String agencyCode) 
 	{
-		Employee employeeResult = null;
-		EntityManager em = EMF.get().createEntityManager();
+//		Employee employeeResult = null;
+//		EntityManager em = EMF.get().createEntityManager();
+//		
+//		try {
+//			employeeResult = em.find(Employee.class, eid);	
+//		}
+//
+//		catch(Exception e) {
+//		   System.out.println(e.getMessage());
+//		}
+//		
+//		finally {
+//		em.close();
+//		}
+//		
+//		
+//		return employeeResult;
 		
-		try {
-			employeeResult = em.find(Employee.class, eid);	
-		}
-
-		catch(Exception e) {
-		   System.out.println(e.getMessage());
-		}
-		
-		finally {
-		em.close();
-		}
-		
-		
-		return employeeResult;
+		return null;
 		
 	}
 	

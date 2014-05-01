@@ -1,7 +1,7 @@
 package gov.oit.storefrontweb.servlet;
 
+import gov.oit.storefrontweb.manager.AgencyManager;
 import gov.oit.storefrontweb.model.Agency;
-import gov.oit.storefrontweb.presenter.AgencyManager;
 
 import java.io.IOException;
 

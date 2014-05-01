@@ -1,7 +1,7 @@
 package gov.oit.storefrontweb.test;
 
+import gov.oit.storefrontweb.manager.*;
 import gov.oit.storefrontweb.model.*;
-import gov.oit.storefrontweb.presenter.*;
 
 public class EmployeeTest1 {
     
