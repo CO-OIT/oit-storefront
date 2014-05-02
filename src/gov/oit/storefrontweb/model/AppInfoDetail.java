@@ -1,111 +1,49 @@
 package gov.oit.storefrontweb.model;
 
-import gov.oit.storefrontweb.shared.EMF;
+public class AppInfoDetail {
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+	private String _key;
+	private String _detailShortDescription;
+	private String _detailLongDescription;
+	private String _appInfoCategoryKey;
+	private int _order;
+	private Boolean _active;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.TypedQuery;
-
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-
-@Entity(name = "AppInfoDetail") 
-public class AppInfoDetail extends ActiveRecord {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Key key;
-	private String detailShortDescription;
-	private String detailLongDescription;
-	private String appInfoHeadingId;
-
-	public String getAppInfoHeadingId() {
-		return appInfoHeadingId;
+    public String get_key() {
+		return _key;
 	}
-
-	public void setAppInfoHeadingId(String appInfoHeadingId) {
-		this.appInfoHeadingId = appInfoHeadingId;
+	public void set_key(String _key) {
+		this._key = _key;
 	}
-
-	//Constructor
-	public AppInfoDetail() {
+	public String get_detailShortDescription() {
+		return _detailShortDescription;
 	}
-	
-	 // Key	
-//	public void setKey(String appInfoDetailId) {
-//		this.key = KeyFactory.createKey("AppInfoDetail", appInfoDetailId);	
-//	}
-
-	public Key getKey() {
-        return key;
-    }
-	
-	public String getDetailShortDescription() {
-		return detailShortDescription;
+	public void set_detailShortDescription(String _detailShortDescription) {
+		this._detailShortDescription = _detailShortDescription;
 	}
-	public void setDetailShortDescription(String detailShortDescription) {
-		this.detailShortDescription = detailShortDescription;
+	public String get_detailLongDescription() {
+		return _detailLongDescription;
 	}
-	public String getDetailLongDescription() {
-		return detailLongDescription;
+	public void set_detailLongDescription(String _detailLongDescription) {
+		this._detailLongDescription = _detailLongDescription;
 	}
-	public void setDetailLongDescription(String detailLongDescription) {
-		this.detailLongDescription = detailLongDescription;
+	public String get_appInfoCategoryKey() {
+		return _appInfoCategoryKey;
 	}
-	
-	//Active Record Methods
-	
-	@Override
-	public Map<String, String> GetKVList(String lookup) {    	
-		
-	     return null;
-		
-     }
-
-	public List<AppInfoDetail> listForHeadingType(String headingId) {
-
-		List<AppInfoDetail> results = new ArrayList<AppInfoDetail>();
-		EntityManager em = EMF.get().createEntityManager();
-		//TypedQuery<Employee> myQuery;
-		TypedQuery<AppInfoDetail> myQuery;
-		
-		try
-		{
-			String qry = String.format("SELECT d FROM AppInfoDetail d WHERE appInfoHeadingId = '%s' ORDER BY detailLongDescription", headingId);
-			
-			myQuery = em.createQuery(qry,AppInfoDetail.class);
-							
-			results = myQuery.getResultList();
-							
-			em.clear();
-		}
-		
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-			
-		}
-		
-		finally
-		{
-			em.close();
-		}
-		
-		return results;	
-
+	public void set_appInfoCategoryKey(String _appInfoCategoryKey) {
+		this._appInfoCategoryKey = _appInfoCategoryKey;
 	}
-	
-	
-	
-	
-	
-	
+	public int get_order() {
+		return _order;
+	}
+	public void set_order(int _order) {
+		this._order = _order;
+	}
+	public Boolean get_active() {
+		return _active;
+	}
+	public void set_active(Boolean _active) {
+		this._active = _active;
+	}
 
 }

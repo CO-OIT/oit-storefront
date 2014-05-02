@@ -7,80 +7,16 @@
 
   <!-- Servlets -->
   <servlet-mapping>
-    <servlet-name>runbook</servlet-name>
-    <url-pattern>/runbook</url-pattern>
+    <servlet-name>appOverview</servlet-name>
+    <url-pattern>/appOverview</url-pattern>
   </servlet-mapping>
   
   <servlet>
-      <servlet-name>runbook</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.servlet.RunbookServlet</servlet-class>
+      <servlet-name>appOverview</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.AppOverviewServlet</servlet-class>
   </servlet> 
    
-   
-   
-  <servlet-mapping>
-    <servlet-name>masterTestService</servlet-name>
-    <url-pattern>/masterTest</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-      <servlet-name>masterTestService</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.servlet.MasterTestService</servlet-class>
-  </servlet>  
     
-    
-  <servlet-mapping>
-    <servlet-name>testAddAgencyServlet</servlet-name>
-    <url-pattern>/testAddAgency</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>testAddOSServlet</servlet-name>
-    <url-pattern>/testAddOS</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>test1Servlet</servlet-name>
-    <url-pattern>/test1</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>empSearchEidServlet</servlet-name>
-    <url-pattern>/empSearchEid</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-      <servlet-name>testAddOSServlet</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.servlet.TestOSServlet</servlet-class>
-  </servlet>  
-  
-  <servlet>
-      <servlet-name>testAddAgencyServlet</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.servlet.TestAgencyServlet</servlet-class>
-  </servlet>  
-  
-  
-    <servlet>
-      <servlet-name>empSearchEidServlet</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.servlet.EmployeeSearchEidServlet</servlet-class>
-  </servlet>  
-
-  <servlet>
-      <servlet-name>test1Servlet</servlet-name>
-      <servlet-class>gov.oit.storefrontweb.presenter.Test1Servlet</servlet-class>
-  </servlet>  
-  
- 
-  <servlet-mapping>
-    <servlet-name>employeeListServlet</servlet-name>
-    <url-pattern>/employeeList</url-pattern>
-  </servlet-mapping>
-  
-    <servlet>
-		<servlet-name>employeeListServlet</servlet-name>
-		<servlet-class>gov.oit.storefrontweb.servlet.EmployeeListServlet</servlet-class>
-	</servlet>
- 
     
   <!-- Default page to serve -->
   <welcome-file-list>
