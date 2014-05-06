@@ -1,38 +1,28 @@
 package gov.oit.storefrontweb.model;
 
-import java.util.List;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue; 
-import javax.persistence.GenerationType; 
-import javax.persistence.Id;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-
 
 public class ServiceOverview {
 
 //Properties
-	
+
     private String _key;
 
 	//Service or App Name
 	private String _appName;
-	
+
 	//Agency Key
 	private String _agencyKey;
-	
+
 	//Service Cat Key
 	private String _catKey;
-	
+
 	//FunctionalServiceKey
 	private String _functionalServiceKey;
-	
+
 	//Business Owner
     private String _businessOwner;
-	
+
 	//App Portfolio Key
     private String _portfolioKey;
     
@@ -50,16 +40,16 @@ public class ServiceOverview {
         
 	//Senior Portfolio Manager
 	private String _portfolioManager;
-	
+
 	//Application Manager
 	private String _appManager;
-	
+
 	//Solution Architect
 	private String _solArchitect;
-	
+
 	//Lead Engineer
 	private String _leadEngineer;
-	
+
 	//T1 Support
     private String _t1Support;
     
@@ -68,7 +58,7 @@ public class ServiceOverview {
 
     //T3 Support
     private String _t3Support;
-	
+
 	//Data Classification
     private String _dataClassification;
     
@@ -92,16 +82,16 @@ public class ServiceOverview {
     
 	//Data Center LAN Engineer
 	private String _dcLanEngineer;
-	
+
     //SecOps Engineer
 	private String _secopsEngineer;
-	
+
 	//Server Platform Key
 	private String _serverPlatformKey;
-	
+
 	//Hypervisor Key
 	private String _hypervisorKey;
-	
+
 	//Host OS Key
     private String _hostOsKey;
     
@@ -110,12 +100,16 @@ public class ServiceOverview {
     
 	//Server Hosting Manager
 	private String _serverHostingManager;
-	
+
 	//Server Administrator
     private String _serverAdmin;
-	
+
 	//Storage Administrator
     private String _storageAdmin;
+       
+    private Date _dateAdded;
+    
+    private Date _lastUpdated;
 
 	public String get_appName() {
 		return _appName;
@@ -388,5 +382,21 @@ public class ServiceOverview {
 	public void set_key(String _key) {
 		this._key = _key;
 	}
-	
+
+	public Date get_dateAdded() {
+		return _dateAdded;
+	}
+
+	public void set_dateAdded(Date _dateAdded) {
+		this._dateAdded = _dateAdded;
+	}
+
+	public Date get_lastUpdated() {
+		return _lastUpdated;
+	}
+
+	public void set_lastUpdated(Date _lastUpdated) {
+		this._lastUpdated = _lastUpdated;
+	}
+
 }

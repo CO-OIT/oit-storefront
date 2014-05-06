@@ -128,9 +128,10 @@ label {
 			         Direct questions or comments to the Senior Service Portfolio Mgr (SSPM) or send an email to: oit_enterprisearchitecturegroup@state.co.us
 			      </p>
 		
+			<input type="hidden" name="hiddenId" Id="hiddenId" value='<%= request.getParameter("info.key") %>' />
+
 			<table id="tblMain">
-			
-			 
+						 
 			 <!--  Services -->
 			 <tr>
 			    <td class="sub1">Service Classifications</td>
@@ -139,17 +140,17 @@ label {
 			 
 			 <tr>
 			     <td class="col1"><label for="txtServiceName">Service or Application Name</label>
-			         <input type="text" name="txtServiceName" id="txtServiceName" />
+			         <input type="text" name="txtServiceName" id="txtServiceName" value='<%= request.getParameter("info.appName") %>'>
 			     </td>
 
 			     <td class="col2"><label for="ddFunctionalServiceGroup">Functional Service Group</label>
 			         <select id="ddFunctionalServiceGroup" name="ddFunctionalServiceGroup">
-			             <option value="group1">Group 1</option>
-			             <option value="group2">Group 2</option>
-			             <option value="group3">Group 3</option>
-			             <option value="group4">Group 4</option>
-			             <option value="group5">Group 5</option>
-			             <option value="group6">Group 6</option>			             
+    			         <c:forEach items="${ddFunctionalServiceGroup}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>
 			         </select>
 			     </td>
 			 </tr>
@@ -157,30 +158,29 @@ label {
 			 <tr >
 			     <td  class="col1"><label for="ddAgency">Agency</label>
 			         <select id="ddAgency" name="ddAgency">
-			             <option value="DPA">DPA</option>
-			             <option value="CDOT">CDOT</option>
-			             <option value="CDOR">CDOR</option>
-			             <option value="CDPS">CDPS</option>
-			             <option value="CDPHE">CDPHE</option>
-			             <option value="CDOL">CDOL</option>			             
-			             <option value="OIT">OIT</option>			             
+    			         <c:forEach items="${ddAgency}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtBusinessOwner">Business Owner</label>
-			         <input type="text" id="txtBusinessOwner" name="txtBusinessOwner" />
+			         <input type="text" id="txtBusinessOwner" name="txtBusinessOwner" value='<%= request.getParameter("info.businessOwner") %>' />
 			     </td>
 			 </tr>
 			 
 			 <tr >
 			     <td  class="col1"><label for="ddServiceCategory">Service Category</label>
 			         <select id="ddServiceCategory" name="ddServiceCategory">
-			             <option value="cat1">Category 1</option>
-    			         <option value="cat2">Category 2</option>
-    			         <option value="cat3">Category 3</option>
-    			         <option value="cat4">Category 4</option>
-    			         <option value="cat5">Category 5</option>
-    			         <option value="cat6">Category 6</option>			             
+    			         <c:forEach items="${ddServiceCategory}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>
 			         </select>
 			     </td>
 
@@ -198,44 +198,47 @@ label {
 			 <tr >
 			     <td  class="col1"><label for="ddAppPortfolio">Application Portfolio</label>
 			         <select id="ddAppPortfolio" name="ddAppPortfolio">
-			             <option value="port1">Portfolio 1</option>
-			             <option value="port2">Portfolio 2</option>
-			             <option value="port3">Portfolio 3</option>
-			             <option value="port4">Portfolio 4</option>
-			             <option value="port5">Portfolio 5</option>
-			             <option value="port6">Portfolio 6</option>
-			             <option value="port7">Portfolio 7</option>			             
+    			         <c:forEach items="${ddAppPortfolio}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtSrPortfolioMgr">Senior Portfolio Manager</label>
-			         <input type="text" id="txtSrPortfolioMgr" name="txtSrPortfolioMgr" />
+			         <input type="text" id="txtSrPortfolioMgr" name="txtSrPortfolioMgr" value='<%= request.getParameter("info.portfolioManager") %>' />
 			     </td>
 			 </tr>
 			 
 			 <tr>
 			     <td  class="col1"><label for="ddAppPriority">Application Priority</label>
 			         <select id="ddAppPriority" name="ddAppPriority">
-			             <option value="p1">1 - Low</option>
-			             <option value="p2">2 - Normal</option>
-			             <option value="p3">3 - Urgent</option>
-			             <option value="p4">4 - Explosive</option>
+    			         <c:forEach items="${ddAppPriority}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>
+
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtApplicationMgr">Application Manager</label>
-			         <input type="text" id="txtApplicationMgr" name="txtApplicationMgr" />
+			         <input type="text" id="txtApplicationMgr" name="txtApplicationMgr" value='<%= request.getParameter("info.appManager") %>' />
 			     </td>
 			 </tr>
 			 
 		    <tr >
 			     <td  class="col1"><label for="ddAppArchitecture">Application Architecture</label>
 			         <select id="ddAppArchitecture" name="ddAppArchitecture">
-			             		         
-			             <c:forEach items="${appar}" var="appar">
-                             <option value='${appar.key}'>${appar.detailLongDescription}</option>		         
+    			         <c:forEach items="${ddAppArchitecture}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
 			             </c:forEach>
-			         
 			         </select>
 			     </td>
 
@@ -247,11 +250,13 @@ label {
 		    <tr >
 			     <td  class="col1"><label for="ddWebPlatform">Web Platform</label>
 			         <select id="ddWebPlatform" name="ddWebPlatform">
-			             <option value="apache1">Linux Apache</option>
-			             <option value="apache2">Windows Apache</option>
-			             <option value="iis5">IIS 5</option>
-			             <option value="iis6">IIS 6</option>
-			             <option value="iis7">IIS 7</option>
+			             <c:forEach items="${ddAppPriority}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                              <option value='${item.key}' ${selected} >
+                                  ${item.description}
+                              </option>
+			             </c:forEach>  
+			         
 			         </select>
 			     </td>
 
@@ -263,19 +268,16 @@ label {
 		    <tr >
 			     <td  class="col1"><label for="ddAppPlatform">Application Platform</label>
 			         <select id="ddAppPlatform" name="ddAppPlatform">
-	
-			         
-			             <option value="lamp">LAMP</option>
-			             <option value="dotnet">.NET</option>
-			             <option value="struts">Java Struts</option>
-			             <option value="struts">Java Spring</option>
-			             
-			             
-			         </select>
+    			         <c:forEach items="${ddAppPlatform}" var="item">
+                                                 <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                                 <option value='${item.key}' ${selected} >
+                                                     ${item.description}
+                                                 </option>
+			             </c:forEach>			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtT1Support">Tier 1 Support</label>
-			         <input type="text" id="txtT1Support" name="txtT1Support" />
+			         <input type="text" id="txtT1Support" name="txtT1Support" value='<%= request.getParameter("info.t1Support") %>' %> />
 			     </td>
 			 </tr>
 			 
@@ -283,7 +285,7 @@ label {
 			 <tr >
 			     <td  class="col1">&nbsp;</td>
 			     <td class="col2"><label for="txtT2Support">Tier 2 Support</label>
-			         <input type="text" id="txtT2Support" name="txtT2Support" />
+			         <input type="text" id="txtT2Support" name="txtT2Support" value='<%= request.getParameter("info.t2Support") %>' />
 			     </td>	     
 			 </tr>
 			 
@@ -291,7 +293,7 @@ label {
 			 <tr >
 			     <td  class="col1">&nbsp;</td>
 			     <td class="col2"><label for="txtT3Support">Tier 3 Support</label>
-			         <input type="text" id="txtT3Support" name="txtT3Support" />
+			         <input type="text" id="txtT3Support" name="txtT3Support" value='<%= request.getParameter("info.t3Support") %>' />
 			     </td>	     
 			 </tr>
 
@@ -305,11 +307,11 @@ label {
 			 
              <tr >
 			     <td  class="col1"><label for="txtDataClass">Data Classification(s)</label>
-			         <input type="text" id="txtDataClass" name="txtDataClass" />
+			         <input type="text" id="txtDataClass" name="txtDataClass" value='<%= request.getParameter("info.dataClassification") %>' />
 			     </td>
 
 			     <td class="col2"><label for="txtDatabaseDeveloper">Database Developer</label>
-			         <input type="text" id="txtDatabaseDeveloper" name="txtDatabaseDeveloper" />
+			         <input type="text" id="txtDatabaseDeveloper" name="txtDatabaseDeveloper" value='<%= request.getParameter("info.databaseDeveloper") %>' />
 			     </td>
 			 </tr>
 
@@ -318,7 +320,7 @@ label {
 			     <td  class="col1">&nbsp;</td>
 
 			     <td class="col2"><label for="txtDatabaseAdmin">Database Administrator</label>
-			         <input type="text" id="txtDatabaseAdmin" name="txtDatabaseAdmin" />
+			         <input type="text" id="txtDatabaseAdmin" name="txtDatabaseAdmin" value='<%= request.getParameter("info.databaseAdministrator") %>' />
 			     </td>
 			 </tr>
 
@@ -332,38 +334,44 @@ label {
              <tr >
 			     <td  class="col1"><label for="ddUserLANClass">User LAN Classification</label>
 			         <select id="ddUserLANClass" name="ddLANClass">
-			             <option value="public">Public</option>
-			             <option value="rsite">Remote Site</option>
-			             <option value="campus">Campus</option>
-			             <option value="msite">Multi-Site</option>
+			              <c:forEach items="${ddAppPriority}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                  <option value='${item.key}' ${selected} >
+                                      ${item.description}
+                                  </option>
+			             </c:forEach>			         
 			         </select>
 			     </td>
 
 			     <td  class="col2"><label for="txtAgencyLanEngineer">Agency LAN/WAN Engineer</label>
-			         <input type="text" id="txtAgencyLanEngineer" name="txtAgencyLanEngineer" />
+			         <input type="text" id="txtAgencyLanEngineer" name="txtAgencyLanEngineer" value='<%= request.getParameter("agencyLanEngineer") %>' />
 			     </td>
 			 </tr>
 
              <tr >
 			     <td class="col1"><label for="ddRemoteGateway">Remote Site Gateway Device</label>
 			         <select id="ddRemoteGateway" name="ddRemoteGateway">
-			             <option value="chkPoint">CheckPoint</option>
-			             <option value="cisco">Cisco</option>
+			              <c:forEach items="${ddRemoteGateway}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                                  <option value='${item.key}' ${selected} >
+                                      ${item.description}
+                                  </option>
+			             </c:forEach>			         
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtDataCenterLanEngineer">Data Center LAN Engineer</label>
-			         <input type="text" id="txtDataCenterLanEngineer" name="txtDataCenterLanEngineer" />
+			         <input type="text" id="txtDataCenterLanEngineer" name="txtDataCenterLanEngineer" value='<%= request.getParameter("dcLanEngineer") %>' />
 			     </td>
 			 </tr>
 	
              <tr >
 			     <td class="col1"><label for="txtVlanZone">Data Center VLANs/Zone</label>
-			         <input type="text" id="txtVlanZone" name="txtVlanZone" />
+			         <input type="text" id="txtVlanZone" name="txtVlanZone" value='<%= request.getParameter("dcVlanZone") %>' />
 			     </td>
 
 			     <td class="col2"><label for="txtSecOpsEngineer">SecOps (FW, etc.) Engineer</label>
-			         <input type="text" id="txtSecOpsEngineer" name="txtSecOpsEngineer" />
+			         <input type="text" id="txtSecOpsEngineer" name="txtSecOpsEngineer" value='<%= request.getParameter("secopsEngineer") %>' />
 			     </td>
 			 </tr>
 	
@@ -377,58 +385,63 @@ label {
              <tr >
 			     <td class="col1"><label for="ddServerPlatform">Server Platform</label>
 			         <select id="ddServerPlatform" name="ddServerPlatform">
-			             <option value="apache1">Linux Apache</option>
-			             <option value="apache2">Windows Apache</option>
-			             <option value="iis5">IIS 5</option>
-			             <option value="iis6">IIS 6</option>
-			             <option value="iis7">IIS 7</option>
-			             <option value="gae">Google Apps</option>
-			             <option value="sf">Salesforce</option>
+			             <c:forEach items="${ddServerPlatform}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                              <option value='${item.key}' ${selected} >
+                                  ${item.description}
+                              </option>
+			             </c:forEach>  
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtServerHostingManager">Server Hosting Manager</label>
-			         <input type="text" id="txtServerHostingManager" name="txtServerHostingManager" />
+			         <input type="text" id="txtServerHostingManager" name="txtServerHostingManager" value='<%= request.getParameter("serverHostingManager") %>' />
 			     </td>
 			 </tr>
 	
              <tr >
 			     <td class="col1"><label for="ddHypervisor">Hypervisor</label>
 			         <select id="ddHypervisor" name="ddHypervisor">
-			             <option value="vmw">VMWare</option>
-			             <option value="xen">Xen</option>
-			             <option value="kvm">KVM</option>
+			             <c:forEach items="${ddHypervisor}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                              <option value='${item.key}' ${selected} >
+                                  ${item.description}
+                              </option>
+			             </c:forEach>  
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtServerAdministrator">Server Administrator</label>
-			         <input type="text" id="txtServerAdministrator" name="txtServerAdministrator" />
+			         <input type="text" id="txtServerAdministrator" name="txtServerAdministrator" value='<%= request.getParameter("serverAdmin") %>' />
 			     </td>
 			 </tr>
 	
              <tr >
 			     <td class="col1"><label for="ddHostOS">Host OS</label>
 			         <select id="ddHostOS" name="ddHostOS">
-			             <option value="ws03">Windows Server 2003</option>
-			             <option value="ws08">Windows Server 2008</option>
-			             <option value="rhel5">Red Hat 5</option>
-			             <option value="rhel6">Red Hat 6</option>
+			             <c:forEach items="${ddHostOS}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                              <option value='${item.key}' ${selected} >
+                                  ${item.description}
+                              </option>
+			             </c:forEach>  
 			         </select>
 			     </td>
 
 			     <td class="col2"><label for="txtStorageAdministrator">Storage Administrator</label>
-			         <input type="text" id="txtStorageAdministrator" name="txtStorageAdministrator" />
+			         <input type="text" id="txtStorageAdministrator" name="txtStorageAdministrator" value='<%= request.getParameter("storageAdmin") %>' />
 			     </td>
 			 </tr>
 
              <tr >
 			     <td class="col1"><label for="ddGuestOS">Guest OS</label>
 			         <select id="ddGuestOS" name="ddHostOS">
-			             <option value="ws03">Windows Server 2003</option>
-			             <option value="ws08">Windows Server 2008</option>
-			             <option value="rhel5">Red Hat 5</option>
-			             <option value="rhel6">Red Hat 6</option>
-			             <option value="centos">CentOS</option>
+			            <c:forEach items="${ddGuestOS}" var="item">
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                              <option value='${item.key}' ${selected} >
+                                  ${item.description}
+                              </option>
+			             </c:forEach>  
 			         </select>
 			     </td>
 
