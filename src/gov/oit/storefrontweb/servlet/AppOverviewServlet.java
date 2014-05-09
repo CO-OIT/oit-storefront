@@ -1,13 +1,8 @@
 package gov.oit.storefrontweb.servlet;
 
-import gov.oit.storefrontweb.manager.DropDownInfo;
-import gov.oit.storefrontweb.manager.ddAppPortfolio;
-import gov.oit.storefrontweb.manager.ddFunctionalServiceGroup;
-import gov.oit.storefrontweb.manager.ddHostOS;
-import gov.oit.storefrontweb.manager.ddRemoteGateway;
-import gov.oit.storefrontweb.manager.ddWebPlatform;
 import gov.oit.storefrontweb.model.AppInfoDetail;
 import gov.oit.storefrontweb.model.DropdownInfo;
+import gov.oit.storefrontweb.model.ServiceOverview;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +17,7 @@ public class AppOverviewServlet extends HttpServlet {
 	
 	static final long serialVersionUID = 9999991; 
 	
-	
+	//Private Vars
     List<DropdownInfo> _ddFunctionalServiceGroup;
     List<DropdownInfo> _ddAgency;
     List<DropdownInfo> _ddServiceCategory;
@@ -32,13 +27,14 @@ public class AppOverviewServlet extends HttpServlet {
     List<DropdownInfo> _ddWebPlatform;
     List<DropdownInfo> _ddAppPlatform;
     List<DropdownInfo> _ddUserLANClass;
-    List<DropdownInfo> _ddRemoteGateway;
+    List<DropdownInfo> _ddSiteGateway;
     List<DropdownInfo> _ddServerPlatform;
     List<DropdownInfo> _ddHypervisor;
     List<DropdownInfo> _ddHostOS;
     List<DropdownInfo> _ddGuestOS;
 	
-	
+	ServiceOverview _serviceOverview;
+    
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -62,86 +58,134 @@ public class AppOverviewServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		
-		String id = req.getParameter("id");
+		
+		String key = req.getParameter("key");
 		
 		//Is this a new record?
-        if (null == id || id.trim() == "") {
-        	
+        if (null == key || key.trim() == "") {
+           req = this.getNewRequest();    	
         }
 		
 		//Is this be update, yo?
         else {
-        	
+          
+          //TODO: Populate with existing data from datastore
+           _serviceOverview = new ServiceOverview();
+           
+           req = this.getUpdateRequest(key);
         }
 		
-		
-		//Create an instance of AppInfoDetail
-		AppInfoDetail detail = new AppInfoDetail();
-		
-		//Call the list of application architecture types for dropdown
-		//List<AppInfoDetail> appar  = detail.listForHeadingType("APPAR");
-		
-		//Return the list to the view
-		//req.setAttribute("appar", appar);
-		
-		String id = request.getParameter("id");
-		Note note = noteService.find(id);
-		request.setAttribute("note", note);
-		request.getRequestDispatcher("/WEB-INF/showdetails.jsp").forward(request, response);
-		
-		
-	    req.getRequestDispatcher("RunBook.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/runbook.jsp").forward(req, resp);
+
 	}
 	
 	
 	
+	//Get new request -- blank fields and default dropdowns
+	private HttpServletRequest getNewRequest() {
+		
+		return null;
+		
+	}
+	
+	
+	private HttpServletRequest getUpdateRequest(String key) {
+
+		return null;
+		
+		
+		
+	}
+	
+	
 	private HttpServletResponse createNewAppOverview() {
+		return null;
 		
 	}
 	
 	private HttpServletResponse createEditForm() {
+		return null;
 		
 	}
 	
+	
+	
 	private void assignDropdownInfo() {
 			  
-//			  ddFunctionalServiceGroup
-//			  ddAgency
-//			  ddServiceCategory
-//			  ddAppPortfolio
-//			  ddAppPriority
-//			  ddAppArchitecture
-//			  ddWebPlatform
-//			  ddAppPlatform
-//			  ddUserLANClass
-//			  ddRemoteGateway
-//			  ddServerPlatform
-//			  ddHypervisor
-//			  ddHostOS
-//			  ddGuestOS
-		
        //Get all app info details as list
 		
 	  // Break list into subgroups
 		
-		for (Fakenbake item : baseList) {
+		List<DropdownInfo> baseList = getBaseDropdownInfoList();
+		String itemKeySelected = "";
 			
-			switch (item.get_cat()) {
+		for (DropdownInfo item : baseList) {
 			
-			case "CAT1":
-				_cat1.add(revisedEntry(item));
+			switch (item.get_category().toUpperCase()) {
+
+			case "FUNC-SERVICE-GROUP":
+				itemKeySelected = _serviceOverview.get_functionalServiceKey();
+				_ddFunctionalServiceGroup.add(this.revisedEntry(item, itemKeySelected));
 				break;
 				
-			case "CAT2":
-				_cat2.add(revisedEntry(item));
+			case "AGENCY":
+				itemKeySelected = _serviceOverview.get_agencyKey();
+				_ddAgency.add(this.revisedEntry(item, itemKeySelected));
 				break;
 				
-			case "CAT3":
-				_cat3.add(revisedEntry(item));
+			case "SERVICE-CATEGORY":
+				itemKeySelected = _serviceOverview.get_catKey();
+				_ddServiceCategory.add(this.revisedEntry(item, itemKeySelected));
+				break;
+			
+			case "APP-PORTFOLIO":
+				itemKeySelected = _serviceOverview.get_portfolioKey();
+				_ddAppPortfolio.add(this.revisedEntry(item, itemKeySelected));
+			    break;
+			
+			case "APP-PRIORITY":
+				itemKeySelected = _serviceOverview.get_priorityKey();
+				_ddAppPriority.add(this.revisedEntry(item, itemKeySelected));
 				break;
 				
-			case "CAT4":
-				_cat4.add(revisedEntry(item));
+			case "APP-ARCHITECTURE":
+				itemKeySelected = _serviceOverview.get_appArchKey();
+				_ddAppArchitecture.add(this.revisedEntry(item, itemKeySelected));
+				break;
+				
+			case "WEB-PLATFORM":
+				itemKeySelected = _serviceOverview.get_webPlatformKey();
+				_ddWebPlatform.add(this.revisedEntry(item, itemKeySelected));
+				break;
+				
+			case "USER-LAN-CLASS":
+				itemKeySelected = _serviceOverview.get_lanClassKey();
+				_ddUserLANClass.add(this.revisedEntry(item, itemKeySelected));
+				break;
+				
+			case "SITE-GATEWAY":
+				itemKeySelected = _serviceOverview.get_siteGatewayKey();
+				_ddSiteGateway.add(this.revisedEntry(item, itemKeySelected));
+				break;
+			
+			case "SERVER-PLATFORM":
+				itemKeySelected = _serviceOverview.get_serverPlatformKey();
+				_ddServerPlatform.add(this.revisedEntry(item, itemKeySelected));
+				break;
+				
+			case "HYPERVISOR":
+				itemKeySelected = _serviceOverview.get_hypervisorKey();
+				_ddHypervisor.add(this.revisedEntry(item, itemKeySelected));
+				break;
+					
+			case "HOST-OS":
+				itemKeySelected = _serviceOverview.get_hostOsKey();
+				_ddHostOS.add(this.revisedEntry(item, itemKeySelected));
+				break;
+
+			case "GUEST-OS":
+				itemKeySelected = _serviceOverview.get_guestOsKey();
+				_ddGuestOS.add(this.revisedEntry(item, itemKeySelected));
 				break;
 				
 			default:
@@ -149,134 +193,35 @@ public class AppOverviewServlet extends HttpServlet {
 				break;			
 			}
 		}
-
 	}
-	
-	import java.util.ArrayList;
-	import java.util.List;
-
-
-	public class ListParser {
-
-		private List<Fakenbake> _cat1;
-		private List<Fakenbake> _cat2;
-		private List<Fakenbake> _cat3;
-		private List<Fakenbake> _cat4;
-	    private List<Integer> _inList;
-		
-		private void setup() {
-			
-			_inList = new ArrayList<Integer>();
-			_inList.add(1);
-			_inList.add(6);
-			_inList.add(9);
-			_inList.add(12);
-			
-			_cat1 = new ArrayList<Fakenbake>();
-			_cat2 = new ArrayList<Fakenbake>();
-			_cat3 = new ArrayList<Fakenbake>();
-			_cat4 = new ArrayList<Fakenbake>();
-			
-			List<Fakenbake> baseList = makeList();
-			
-			for (Fakenbake item : baseList) {
 				
-				switch (item.get_cat()) {
-				
-				case "CAT1":
-					_cat1.add(revisedEntry(item));
-					break;
-					
-				case "CAT2":
-					_cat2.add(revisedEntry(item));
-					break;
-					
-				case "CAT3":
-					_cat3.add(revisedEntry(item));
-					break;
-					
-				case "CAT4":
-					_cat4.add(revisedEntry(item));
-					break;
-					
-				default:
-					//Log error.
-					break;			
-				}
-			}
-		}
-		
-		private void printEm() {
+		//Determine whether the selected key for this application overview dropdown item 
+		// (if this is an edit) correlates to the dropdownInfo item being fed into this
+		// method.
+		// If it does, mark "selected" as true.
+		private DropdownInfo revisedEntry(DropdownInfo inDropdownInfo, 
+				String appKeySelected) {
+
+			DropdownInfo returnDropdown = null;
+			String thisKey = inDropdownInfo.get_key();
+
+			Boolean selected = (thisKey == appKeySelected)  ? true : false; 
 			
-			System.out.println("CAT1");
+            if (selected) {
+			   returnDropdown = new DropdownInfo(inDropdownInfo.get_key(), inDropdownInfo.get_description(), inDropdownInfo.get_category(), selected, inDropdownInfo.get_order());
+            }
+            
+            else {
+              returnDropdown = inDropdownInfo;
+            }
 			
-			for (Fakenbake item : _cat1) {
-		       printFormat(item);		
-			}
-			
-			System.out.println("CAT2");
-			
-			for (Fakenbake item : _cat2) {
-			    printFormat(item);		
-			}
-			
-			System.out.println("CAT3");
-			
-			for (Fakenbake item : _cat3) {
-			    printFormat(item);		
-			}
-			
-			System.out.println("CAT4");
-			
-			for (Fakenbake item : _cat4) {
-			    printFormat(item);		
-			}
-		}
-		
-		private void printFormat(Fakenbake f) {
-			System.out.println(String.format("%s: %s --> %s", f.get_key(), f.get_desc(), f.get_selected()));
-		}
-		
-		private Fakenbake revisedEntry(Fakenbake baseEntry) {
-			
-			Fakenbake f = null;
-			Boolean selected = _inList.contains(baseEntry.get_key()) ? true : false; 
-			
-			f = new Fakenbake(baseEntry.get_key(), baseEntry.get_desc(), baseEntry.get_cat(), selected);
-			
-			return f;
+			return returnDropdown;
 		}
 		
 		
-		private List<Fakenbake> makeList() {
-			
-			List<Fakenbake> list = new ArrayList<Fakenbake>();
-			
-			list.add(new Fakenbake( 0, "CAT1-D1", "CAT1", false));
-			list.add(new Fakenbake( 1, "CAT1-D2", "CAT1", false));
-			list.add(new Fakenbake( 2, "CAT1-D3", "CAT1", false));
-			list.add(new Fakenbake( 3, "CAT1-D4", "CAT1", false));
-			list.add(new Fakenbake( 4, "CAT2-D1", "CAT2", false));
-			list.add(new Fakenbake( 5, "CAT2-D2", "CAT2", false));
-			list.add(new Fakenbake( 6, "CAT2-D3", "CAT2", false));
-			list.add(new Fakenbake( 7, "CAT2-D4", "CAT2", false));
-			list.add(new Fakenbake( 8, "CAT3-D1", "CAT3", false));
-			list.add(new Fakenbake( 9, "CAT3-D2", "CAT3", false));
-			list.add(new Fakenbake( 10, "CAT3-D3", "CAT3", false));
-			list.add(new Fakenbake( 11, "CAT3-D4", "CAT3", false));
-			list.add(new Fakenbake( 12, "CAT4-D1", "CAT4", false));
-			list.add(new Fakenbake( 13, "CAT4-D2", "CAT4", false));
-			list.add(new Fakenbake( 14, "CAT4-D3", "CAT4", false));
-			list.add(new Fakenbake( 15, "CAT4-D4", "CAT4", false));
-					
-			return list;
-		}
-		
-		public void run() {
-			setup();
-			printEm();
-		}
-		
+	private List<DropdownInfo> getBaseDropdownInfoList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

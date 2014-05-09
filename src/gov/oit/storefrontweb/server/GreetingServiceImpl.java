@@ -1,7 +1,8 @@
 package gov.oit.storefrontweb.server;
 
 import gov.oit.storefrontweb.client.GreetingService;
-import gov.oit.storefrontweb.shared.FieldVerifier;
+import gov.oit.storefrontweb.helpers.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**

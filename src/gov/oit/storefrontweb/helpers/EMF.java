@@ -1,4 +1,4 @@
-package gov.oit.storefrontweb.shared;
+package gov.oit.storefrontweb.helpers;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

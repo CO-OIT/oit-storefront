@@ -1,4 +1,4 @@
-package gov.oit.storefrontweb.shared;
+package gov.oit.storefrontweb.helpers;
 
 public class StringChecker {
 

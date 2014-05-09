@@ -335,7 +335,7 @@ label {
 			     <td  class="col1"><label for="ddUserLANClass">User LAN Classification</label>
 			         <select id="ddUserLANClass" name="ddLANClass">
 			              <c:forEach items="${ddAppPriority}" var="item">
-                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
+                               <c:set var="selected" value="${item.selected} ='true' ? 'selected'" /> 
                                   <option value='${item.key}' ${selected} >
                                       ${item.description}
                                   </option>
@@ -349,8 +349,8 @@ label {
 			 </tr>
 
              <tr >
-			     <td class="col1"><label for="ddRemoteGateway">Remote Site Gateway Device</label>
-			         <select id="ddRemoteGateway" name="ddRemoteGateway">
+			     <td class="col1"><label for="ddSiteGateway">Remote Site Gateway Device</label>
+			         <select id="ddSiteGateway" name="ddSiteGateway">
 			              <c:forEach items="${ddRemoteGateway}" var="item">
                               <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
                                   <option value='${item.key}' ${selected} >

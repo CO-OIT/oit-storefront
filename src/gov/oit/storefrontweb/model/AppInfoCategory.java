@@ -7,6 +7,15 @@ public class AppInfoCategory {
     private String _longDescription;
     private Boolean _active;
 	
+    
+    public AppInfoCategory(String key, String shortDescription, String longDescription, Boolean active) {
+    	
+    	this._active = active;
+    	this._key = key;
+    	this._longDescription = longDescription;
+    	this._shortDescription = shortDescription;
+    }
+    
     public String get_key() {
 		return _key;
 	}

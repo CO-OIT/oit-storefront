@@ -133,14 +133,18 @@ public class ServiceOverviewManager {
 		  
 		  public List<DropdownInfo> getAllActiveDropdownInfo() {
 			  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-              List<AppInfoDetail> list = new ArrayList<AppInfoDetail>();
+              List<DropdownInfo> list = new ArrayList<DropdownInfo>();
               Filter detailFilter = new FilterPredicate("active", FilterOperator.EQUAL, true );
               Query qry = new Query(ENT_APP_INFO_DETAIL).setFilter(detailFilter);
               
               PreparedQuery pq = datastore.prepare(qry);
+              
+              for (Entity ent : pq.asIterable()) {
+			      list.add(this.convertEntityToDropdownInfo(ent));
+			  }
 			  
-			  
-			  
+			  return list;
+                            
 		  }
 		  
 		  
