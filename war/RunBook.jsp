@@ -335,7 +335,8 @@ label {
 			     <td  class="col1"><label for="ddUserLANClass">User LAN Classification</label>
 			         <select id="ddUserLANClass" name="ddLANClass">
 			              <c:forEach items="${ddAppPriority}" var="item">
-                               <c:set var="selected" value="${item.selected} ='true' ? 'selected'" /> 
+
+                              <c:set var="selected" value="${item.selected}='true' ? 'selected'" /> 
                                   <option value='${item.key}' ${selected} >
                                       ${item.description}
                                   </option>
@@ -494,19 +495,6 @@ label {
 </div>
  
 </div> 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
 
 </form>
 
