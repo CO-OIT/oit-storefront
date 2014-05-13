@@ -12,21 +12,7 @@ import gov.oit.storefrontweb.model.AppInfoDetail;
 import gov.oit.storefrontweb.helpers.*;
 
 public class OptionValuesManager {
-	
-    public void saveAppInfoCategory(AppInfoCategory appInfoCategory) throws EntityNotFoundException {
-    	
-    	DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-		 
-		 Entity ent = new Entity(Constants.ENT_APP_INFO_CATEGORY, appInfoCategory.get_key());
-
-		 ent.setProperty("shortDescription", appInfoCategory.get_shortDescription());
-		 ent.setProperty("longDescription", appInfoCategory.get_longDescription());
-		 ent.setProperty("active", appInfoCategory.get_active());
-		 
-		 ds.put(ent);		 
-    }
-	
-	
+		
 	public void saveAppInfoDetail(AppInfoDetail appInfoDetail) throws EntityNotFoundException {
 
 		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
