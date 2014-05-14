@@ -10,12 +10,23 @@
     <servlet-name>appOverview</servlet-name>
     <url-pattern>/appOverview</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>updateAppInfoCategory</servlet-name>
+    <url-pattern>/updateAppInfoCategory</url-pattern>
+  </servlet-mapping>
+  
   
   <servlet>
       <servlet-name>appOverview</servlet-name>
       <servlet-class>gov.oit.storefrontweb.servlet.AppOverviewServlet</servlet-class>
   </servlet> 
-   
+
+    <servlet>
+      <servlet-name>updateAppInfoCategory</servlet-name>
+      <servlet-class>gov.oit.storefrontweb.servlet.AppInfoCategoryServlet</servlet-class>
+  </servlet> 
+  
     
     
   <!-- Default page to serve -->

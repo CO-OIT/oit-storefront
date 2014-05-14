@@ -1,11 +1,4 @@
-<!-- Indices written at Tue, 29 Apr 2014 09:39:27 MDT -->
+<!-- Indices written at Wed, 14 May 2014 09:38:39 MDT -->
 
-<datastore-indexes>
+<datastore-indexes/>
 
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="AppInfoDetail" ancestor="false" source="auto">
-        <property name="appInfoHeadingId" direction="asc"/>
-        <property name="detailLongDescription" direction="asc"/>
-    </datastore-index>
-
-</datastore-indexes>

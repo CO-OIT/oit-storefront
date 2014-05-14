@@ -60,23 +60,23 @@ public class AppOverviewServlet extends HttpServlet {
 			throws IOException, ServletException {
 		
 		
-		String key = req.getParameter("key");
-		
-		//Is this a new record?
-        if (null == key || key.trim() == "") {
-           req = this.getNewRequest();    	
-        }
-		
-		//Is this be update, yo?
-        else {
-          
-          //TODO: Populate with existing data from datastore
-           _serviceOverview = new ServiceOverview();
-           
-           req = this.getUpdateRequest(key);
-        }
-		
-		req.getRequestDispatcher("/WEB-INF/runbook.jsp").forward(req, resp);
+//		String key = req.getParameter("key");
+//		
+//		//Is this a new record?
+//        if (null == key || key.trim() == "") {
+//           req = this.getNewRequest();    	
+//        }
+//		
+//		//Is this be update, yo?
+//        else {
+//          
+//          //TODO: Populate with existing data from datastore
+//           _serviceOverview = new ServiceOverview();
+//           
+//           req = this.getUpdateRequest(key);
+//        }
+//		
+//		req.getRequestDispatcher("/WEB-INF/runbook.jsp").forward(req, resp);
 
 	}
 	
