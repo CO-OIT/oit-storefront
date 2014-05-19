@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
 
+
+
 public class AppInfoCategoryServlet extends HttpServlet {
 
 	static final long serialVersionUID = 9999981;
@@ -60,7 +62,7 @@ public class AppInfoCategoryServlet extends HttpServlet {
 		String key = req.getParameter("key");
 		System.out.println(key);
 		
-		if (null == key || key.trim() == "") {
+		if (key == null || key.trim() == "") {
 			//req = this.getBlankRequest(req);
 		   	req.setAttribute("message", "New Record");
 			req.setAttribute("key", "");
@@ -68,16 +70,19 @@ public class AppInfoCategoryServlet extends HttpServlet {
 			req.setAttribute("shortDescription", "");
 			req.setAttribute("active", false);
 		}
-//
-//		else {
-//			try {
-//				req = this.getPopulatedRequest(req, key);
-//			} catch (EntityNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//
+
+		else {
+			try {
+				Integer x = 1999;
+				System.out.println(x);
+				req = this.getPopulatedRequest(req, key);
+			} catch (EntityNotFoundException e) {
+			  //catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 //		// Get response object
 		req.getRequestDispatcher(EDIT_FORM).forward(req, resp);
 	}

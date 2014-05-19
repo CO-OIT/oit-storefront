@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+jarsExcludedFromWebInfLib=
 lastWarOutDir=/Users/sysadmin/Documents/storefront_work/Storefront/war
 warSrcDir=war
 warSrcDirIsOutput=false
